@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starterkart — Premium Websites for Clothing Brands in India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'space': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand': {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #09090b;
+            color: #fafafa;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 3px;
+        }
+
+        /* Animated gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #f0abfc, #e879f9, #d946ef, #a855f7, #7c3aed);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Glow effect */
+        .glow-box {
+            position: relative;
+        }
+        .glow-box::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #d946ef, #7c3aed, #d946ef);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .glow-box:hover::before {
+            opacity: 1;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(-5px) rotate(-1deg); }
+        }
+
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Fade in up animation */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger-children .fade-in-up:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-children .fade-in-up:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-children .fade-in-up:nth-child(3) { transition-delay: 0.3s; }
+        .stagger-children .fade-in-up:nth-child(4) { transition-delay: 0.4s; }
+        .stagger-children .fade-in-up:nth-child(5) { transition-delay: 0.5s; }
+        .stagger-children .fade-in-up:nth-child(6) { transition-delay: 0.6s; }
+
+        /* Noise overlay */
+        .noise-overlay::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Pricing card hover */
+        .pricing-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .pricing-card:hover::after {
+            opacity: 1;
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Popular badge pulse */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(217, 70, 239, 0.4); }
+            50% { box-shadow: 0 0 20px 5px rgba(217, 70, 239, 0.2); }
+        }
+        .pulse-badge {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+            animation: marquee 25s linear infinite;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Hero orb */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        /* Button shine effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg) translateY(-100%);
+            transition: transform 0.6s ease;
+        }
+        .btn-shine:hover::after {
+            transform: rotate(45deg) translateY(100%);
+        }
+
+        /* Feature icon container */
+        .feature-icon {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 0 30px rgba(217, 70, 239, 0.3);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Counter animation */
+        .counter-value {
+            display: inline-block;
+        }
+
+        /* Testimonial cards */
+        .testimonial-card {
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover {
+            background: rgba(39, 39, 42, 0.8);
+        }
+
+        /* Grid pattern */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(63, 63, 70, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(63, 63, 70, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Process line */
+        .process-line {
+            position: relative;
+        }
+        .process-line::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 48px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #d946ef, transparent);
+        }
+        .process-line:last-child::after {
+            display: none;
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Comparison mockup */
+        .mockup-container {
+            perspective: 1000px;
+        }
+        .mockup-screen {
+            transition: transform 0.6s ease;
+        }
+        .mockup-container:hover .mockup-screen {
+            transform: rotateY(-5deg) rotateX(2deg);
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3f3f46, transparent);
+        }
+    </style>
+</head>
+<body class="noise-overlay">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background: rgba(9,9,11,0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white font-bold text-sm font-space">S</span>
+                    </div>
+                    <span class="font-space font-bold text-lg tracking-tight">Starterkart</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-sm text-zinc-400 hover:text-white transition-colors duration-300">Features</a>
+                    <a href="#pricing" class="text-sm text-zinc-400 hover:text-white transition-colors duration-300">Pricing</a>
+                    <a href="#process" class="text-sm text-zinc-400 hover:text-white transition-colors duration-300">Process</a>
+                    <a href="#faq" class="text-sm text-zinc-400 hover:text-white transition-colors duration-300">FAQ</a>
+                    <a href="#contact" class="btn-shine ml-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-600 text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+                        Get Started
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="menuBtn" class="md:hidden p-2 text-zinc-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed inset-0 top-0 bg-zinc-950/98 z-50 flex flex-col md:hidden" style="backdrop-filter: blur(20px);">
+            <div class="flex items-center justify-between px-4 h-16">
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-sm font-space">S</span>
+                    </div>
+                    <span class="font-space font-bold text-lg">Starterkart</span>
+                </a>
+                <button id="closeMenuBtn" class="p-2 text-zinc-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="flex flex-col items-center justify-center flex-1 gap-8">
+                <a href="#features" class="mobile-nav-link text-2xl font-medium text-zinc-300 hover:text-white transition-colors">Features</a>
+                <a href="#pricing" class="mobile-nav-link text-2xl font-medium text-zinc-300 hover:text-white transition-colors">Pricing</a>
+                <a href="#process" class="mobile-nav-link text-2xl font-medium text-zinc-300 hover:text-white transition-colors">Process</a>
+                <a href="#faq" class="mobile-nav-link text-2xl font-medium text-zinc-300 hover:text-white transition-colors">FAQ</a>
+                <a href="#contact" class="mobile-nav-link mt-4 inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-600 text-base font-medium">
+                    Get Started
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden grid-pattern">
+        <!-- Background orbs -->
+        <div class="hero-orb w-96 h-96 bg-purple-600 -top-48 -left-48" style="animation-delay: 0s;"></div>
+        <div class="hero-orb w-80 h-80 bg-fuchsia-600 top-1/3 -right-40" style="animation-delay: 2s;"></div>
+        <div class="hero-orb w-64 h-64 bg-violet-600 bottom-20 left-1/4" style="animation-delay: 4s;"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-center">
+            <!-- Badge -->
+            <div class="fade-in-up inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/50 mb-8">
+                <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                <span class="text-xs sm:text-sm text-zinc-400 font-medium">Built exclusively for Indian fashion brands</span>
+            </div>
+
+            <!-- Main heading -->
+            <h1 class="fade-in-up font-space text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight mb-6">
+                Your brand deserves<br>
+                <span class="gradient-text">a website that sells</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="fade-in-up max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-zinc-400 leading-relaxed mb-10">
+                We build conversion-focused, mobile-first online stores that make small clothing brands look established, trustworthy, and premium — from ₹2,999.
+            </p>
+
+            <!-- CTA buttons -->
+            <div class="fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#pricing" class="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-600 text-base font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105">
+                    View Pricing Plans
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </a>
+                <a href="https://wa.me/919818082449?text=Hi%20Starterkart!%20I'm%20interested%20in%20getting%20a%20website%20for%20my%20brand." target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-700 bg-zinc-900/50 text-base font-medium hover:bg-zinc-800 hover:border-zinc-600 transition-all duration-300">
+                    <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat on WhatsApp
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="fade-in-up grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto">
+                <div class="text-center">
+                    <div class="font-space text-2xl sm:text-3xl font-bold text-white counter-value" data-target="50">0</div>
+                    <div class="text-xs sm:text-sm text-zinc-500 mt-1">Brands Served</div>
+                </div>
+                <div class="text-center border-x border-zinc-800">
+                    <div class="font-space text-2xl sm:text-3xl font-bold text-white">48h</div>
+                    <div class="text-xs sm:text-sm text-zinc-500 mt-1">Avg. Delivery</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-space text-2xl sm:text-3xl font-bold text-white">4.9<span class="text-fuchsia-400">★</span></div>
+                    <div class="text-xs sm:text-sm text-zinc-500 mt-1">Client Rating</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-xs text-zinc-500 tracking-widest uppercase">Scroll</span>
+            <div class="w-5 h-8 rounded-full border-2 border-zinc-600 flex justify-center pt-1.5">
+                <div class="w-1 h-2 bg-zinc-400 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <div class="py-6 border-y border-zinc-800/50 bg-zinc-950/50 overflow-hidden">
+        <div class="flex whitespace-nowrap">
+            <div class="marquee-track flex items-center gap-8">
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Mobile-First Design</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>WhatsApp Integration</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Fast Delivery</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Product Upload Support</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Conversion-Focused</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>SEO Optimized</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Made for Fashion Brands</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Premium Look</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3 mr-8"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Built to Sell</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Mobile-First Design</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>WhatsApp Integration</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Fast Delivery</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Product Upload Support</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Conversion-Focused</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>SEO Optimized</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Made for Fashion Brands</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Premium Look</span>
+                <span class="text-sm font-medium text-zinc-600 flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Built to Sell</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <section class="relative py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">The Problem</p>
+                <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    Your Instagram is fire.<br>Your website? <span class="text-zinc-600 line-through">Nonexistent.</span>
+                </h2>
+                <p class="fade-in-up text-zinc-400 text-lg">
+                    You're losing real customers every day because your brand doesn't have a proper online store. Here's what's probably happening right now:
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 stagger-children">
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-red-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">Customers DM but never buy</h3>
+                    <p class="text-sm text-zinc-500">They ask price, check your profile, see no website, and vanish. No trust = no sale.</p>
+                </div>
+
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-red-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">100% dependent on Instagram</h3>
+                    <p class="text-sm text-zinc-500">Algorithm changes, account restrictions — one glitch and your entire business pauses.</p>
+                </div>
+
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-red-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">You look small & unserious</h3>
+                    <p class="text-sm text-zinc-500">Competitors with half your quality have websites. Customers pick them because they look more legit.</p>
+                </div>
+            </div>
+
+            <div class="fade-in-up mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-purple-500/10 to-fuchsia-500/10 border border-purple-500/20 text-center">
+                <p class="text-lg sm:text-xl font-medium text-white">
+                    <span class="gradient-text font-bold">Perception changes buying behavior.</span><br>
+                    <span class="text-zinc-400 text-base mt-2 block">A customer should visit your website and instantly feel your brand is serious, modern, and worth buying from.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Features Section -->
+    <section id="features" class="relative py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">What You Get</p>
+                <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    Everything your brand needs to <span class="gradient-text">sell online</span>
+                </h2>
+                <p class="fade-in-up text-zinc-400 text-lg">
+                    Minimal. Clean. Fast. Built to sell — not just to look good.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 stagger-children">
+                <div class="fade-in-up feature-card p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-purple-500/30 transition-all duration-300">
+                    <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Mobile-First Design</h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed">90% of your customers browse on phones. Every pixel is optimized for mobile shopping first.</p>
+                </div>
+
+                <div class="fade-in-up feature-card p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-purple-500/30 transition-all duration-300">
+                    <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Blazing Fast Speed</h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Lightweight code, optimized images, and clean architecture. Your site loads in under 2 seconds.</p>
+                </div>
+
+                <div class="fade-in-up feature-card p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-purple-500/30 transition-all duration-300">
+                    <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">WhatsApp Integration</h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Direct order buttons, floating WhatsApp chat, and instant customer communication built in.</p>
+                </div>
+
+                <div class="fade-in-up feature-card p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-purple-500/30 transition-all duration-300">
+                    <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Product Upload Support</h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Send us your product images and details. We handle the upload, organization, and presentation.</p>
+                </div>
+
+                <div class="fade-in-up feature-card p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-purple-500/30 transition-all duration-300">
+                    <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Premium Aesthetics</h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Clean typography, perfect spacing, rich visuals. Your ₹2,999 site looks like a ₹50,000 build.</p>
+                </div>
+
+                <div class="fade-in-up feature-card p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 hover:border-purple-500/30 transition-all duration-300">
+                    <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Trust-Building Design</h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Social proof sections, testimonials, brand story — everything to make visitors trust and buy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="relative py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">Simple Pricing</p>
+                <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    Choose your perfect <span class="gradient-text">plan</span>
+                </h2>
+                <p class="fade-in-up text-zinc-400 text-lg">
+                    No hidden charges. No monthly fees. One-time payment. Your website, forever.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto stagger-children">
+                <!-- Basic Plan -->
+                <div class="fade-in-up pricing-card rounded-3xl bg-zinc-900/80 border border-zinc-800 p-8 relative z-10">
+                    <div class="mb-8">
+                        <h3 class="font-space text-xl font-bold text-white mb-1">Basic</h3>
+                        <p class="text-sm text-zinc-500">Perfect starter store</p>
+                    </div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="font-space text-5xl font-bold text-white">₹2,999</span>
+                        <span class="text-sm text-zinc-500">one-time</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Clean, modern 3-page website</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Mobile-responsive design</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Up to 10 product uploads</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">WhatsApp order button</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Delivery in 48-72 hours</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">1 revision round</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/919818082449?text=Hi!%20I'm%20interested%20in%20the%20Basic%20plan%20(₹2,999)" target="_blank" class="block w-full text-center py-3.5 rounded-xl border border-zinc-700 text-sm font-semibold hover:bg-zinc-800 hover:border-zinc-600 transition-all duration-300">
+                        Get Started →
+                    </a>
+                </div>
+
+                <!-- Growth Plan (Popular) -->
+                <div class="fade-in-up pricing-card rounded-3xl bg-zinc-900/80 border-2 border-fuchsia-500/50 p-8 relative z-10 lg:scale-105">
+                    <div class="pulse-badge absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-600 text-xs font-bold tracking-wide uppercase">
+                        Most Popular
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="font-space text-xl font-bold text-white mb-1">Growth</h3>
+                        <p class="text-sm text-zinc-500">For brands ready to scale</p>
+                    </div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="font-space text-5xl font-bold gradient-text">₹5,499</span>
+                        <span class="text-sm text-zinc-500">one-time</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Full 5-page custom website</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Mobile-first premium design</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Up to 30 product uploads</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">WhatsApp + Instagram integration</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">SEO setup & Google indexing</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">3 revision rounds</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">1 month post-launch support</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/919818082449?text=Hi!%20I'm%20interested%20in%20the%20Growth%20plan%20(₹5,499)" target="_blank" class="btn-shine block w-full text-center py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+                        Get Started →
+                    </a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="fade-in-up pricing-card rounded-3xl bg-zinc-900/80 border border-zinc-800 p-8 relative z-10">
+                    <div class="mb-8">
+                        <h3 class="font-space text-xl font-bold text-white mb-1">Premium</h3>
+                        <p class="text-sm text-zinc-500">Full custom premium store</p>
+                    </div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="font-space text-5xl font-bold text-white">₹6,999</span>
+                        <span class="text-sm text-zinc-500">one-time</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Fully custom unlimited pages</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Bespoke premium design</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Unlimited product uploads</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Payment gateway integration</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Advanced SEO & analytics</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300">Unlimited revisions</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <svg class="w-5 h-5 text-fuchsia-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-zinc-300 font-medium">3 months post-launch support</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/919818082449?text=Hi!%20I'm%20interested%20in%20the%20Premium%20plan%20(₹6,999)" target="_blank" class="block w-full text-center py-3.5 rounded-xl border border-zinc-700 text-sm font-semibold hover:bg-zinc-800 hover:border-zinc-600 transition-all duration-300">
+                        Get Started →
+                    </a>
+                </div>
+            </div>
+
+            <p class="fade-in-up text-center text-sm text-zinc-600 mt-8">
+                All plans include hosting setup guidance · Domain connection support · SSL certificate
+            </p>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Process Section -->
+    <section id="process" class="relative py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">How It Works</p>
+                    <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                        From DM to <span class="gradient-text">done</span> in 48 hours
+                    </h2>
+                    <p class="fade-in-up text-zinc-400 text-lg mb-12">
+                        We've made the process dead simple. No long meetings, no jargon, no headaches.
+                    </p>
+
+                    <div class="space-y-0">
+                        <div class="fade-in-up process-line relative flex gap-6 pb-10">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">1</div>
+                            <div class="pt-2">
+                                <h3 class="font-semibold text-white text-lg mb-1">Message Us</h3>
+                                <p class="text-sm text-zinc-500">DM us on Instagram or WhatsApp with your brand name and what you need. That's it.</p>
+                            </div>
+                        </div>
+                        <div class="fade-in-up process-line relative flex gap-6 pb-10">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">2</div>
+                            <div class="pt-2">
+                                <h3 class="font-semibold text-white text-lg mb-1">Share Your Content</h3>
+                                <p class="text-sm text-zinc-500">Send product photos, brand colors, logo, and any inspo. We handle the rest.</p>
+                            </div>
+                        </div>
+                        <div class="fade-in-up process-line relative flex gap-6 pb-10">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">3</div>
+                            <div class="pt-2">
+                                <h3 class="font-semibold text-white text-lg mb-1">We Build & Design</h3>
+                                <p class="text-sm text-zinc-500">Our team crafts your premium store. You get a preview link within 48 hours.</p>
+                            </div>
+                        </div>
+                        <div class="fade-in-up process-line relative flex gap-6">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-600 flex items-center justify-center flex-shrink-0 text-sm font-bold">4</div>
+                            <div class="pt-2">
+                                <h3 class="font-semibold text-white text-lg mb-1">Go Live 🚀</h3>
+                                <p class="text-sm text-zinc-500">Review, request changes, and launch. Your brand just leveled up.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right side - Visual mockup -->
+                <div class="fade-in-up mockup-container flex items-center justify-center">
+                    <div class="mockup-screen relative float-anim">
+                        <!-- Phone mockup -->
+                        <div class="relative w-64 sm:w-72 mx-auto">
+                            <div class="rounded-[2.5rem] border-[6px] border-zinc-700 bg-zinc-900 p-2 shadow-2xl shadow-purple-500/10">
+                                <div class="rounded-[2rem] bg-zinc-950 overflow-hidden">
+                                    <!-- Status bar -->
+                                    <div class="flex items-center justify-between px-6 py-3 text-xs text-zinc-500">
+                                        <span>9:41</span>
+                                        <div class="flex items-center gap-1">
+                                            <div class="w-4 h-2 border border-zinc-600 rounded-sm"><div class="w-3 h-full bg-green-400 rounded-sm"></div></div>
+                                        </div>
+                                    </div>
+                                    <!-- Content preview -->
+                                    <div class="px-4 pb-6">
+                                        <div class="w-full h-40 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 mb-4 flex items-center justify-center">
+                                            <span class="text-2xl">👗</span>
+                                        </div>
+                                        <div class="w-2/3 h-3 bg-zinc-800 rounded mb-2"></div>
+                                        <div class="w-1/2 h-3 bg-zinc-800/50 rounded mb-4"></div>
+                                        <div class="flex gap-2 mb-4">
+                                            <div class="flex-1 h-20 rounded-lg bg-zinc-800/50"></div>
+                                            <div class="flex-1 h-20 rounded-lg bg-zinc-800/50"></div>
+                                            <div class="flex-1 h-20 rounded-lg bg-zinc-800/50"></div>
+                                        </div>
+                                        <div class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-center text-xs font-semibold">
+                                            Shop Now
+                                        </div>
+                                        <div class="flex gap-2 mt-3">
+                                            <div class="flex-1 py-2.5 rounded-lg bg-green-500/20 text-center text-xs text-green-400 font-medium">
+                                                WhatsApp
+                                            </div>
+                                            <div class="flex-1 py-2.5 rounded-lg bg-zinc-800 text-center text-xs text-zinc-400 font-medium">
+                                                Instagram
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Reflection -->
+                            <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-purple-500/5 rounded-full blur-xl"></div>
+                        </div>
+
+                        <!-- Floating elements -->
+                        <div class="absolute -top-4 -right-4 sm:-right-8 px-3 py-2 rounded-lg bg-zinc-800 border border-zinc-700 shadow-xl text-xs" style="animation: float 4s ease-in-out infinite; animation-delay: 1s;">
+                            <span class="text-green-400">✓</span> Mobile Optimized
+                        </div>
+                        <div class="absolute top-1/3 -left-4 sm:-left-12 px-3 py-2 rounded-lg bg-zinc-800 border border-zinc-700 shadow-xl text-xs" style="animation: float 5s ease-in-out infinite; animation-delay: 2s;">
+                            <span class="text-fuchsia-400">⚡</span> 1.2s Load
+                        </div>
+                        <div class="absolute bottom-16 -right-4 sm:-right-10 px-3 py-2 rounded-lg bg-zinc-800 border border-zinc-700 shadow-xl text-xs" style="animation: float 4.5s ease-in-out infinite; animation-delay: 0.5s;">
+                            <span class="text-purple-400">🛒</span> Ready to Sell
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Who We Work With -->
+    <section class="relative py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">Who This Is For</p>
+                <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    Built for brands <span class="gradient-text">like yours</span>
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children">
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 text-center hover:border-purple-500/30 transition-all duration-300 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">👗</div>
+                    <h3 class="font-semibold text-white mb-2">Clothing Brands</h3>
+                    <p class="text-xs text-zinc-500">Streetwear, ethnic, Western, sustainable — any fashion niche.</p>
+                </div>
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 text-center hover:border-purple-500/30 transition-all duration-300 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">📱</div>
+                    <h3 class="font-semibold text-white mb-2">Instagram Sellers</h3>
+                    <p class="text-xs text-zinc-500">You sell via DMs and stories. Time to go pro with a real store.</p>
+                </div>
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 text-center hover:border-purple-500/30 transition-all duration-300 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🚀</div>
+                    <h3 class="font-semibold text-white mb-2">Fashion Startups</h3>
+                    <p class="text-xs text-zinc-500">Just launched and need to look established from day one.</p>
+                </div>
+                <div class="fade-in-up p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/50 text-center hover:border-purple-500/30 transition-all duration-300 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">💎</div>
+                    <h3 class="font-semibold text-white mb-2">Accessory Brands</h3>
+                    <p class="text-xs text-zinc-500">Jewelry, bags, footwear — premium products deserve premium sites.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- Testimonials / Social Proof -->
+    <section class="relative py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">Loved by Brands</p>
+                <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    What our clients <span class="gradient-text">say</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 stagger-children">
+                <div class="fade-in-up testimonial-card p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-fuchsia-400">★★★★★</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-6 leading-relaxed">"I was running my brand entirely from Instagram DMs. Starterkart built me a store in 2 days and my sales literally doubled the first week. Customers take me seriously now."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-sm font-bold">R</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Riya M.</p>
+                            <p class="text-xs text-zinc-500">Ethnic Wear Brand, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in-up testimonial-card p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-fuchsia-400">★★★★★</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-6 leading-relaxed">"For ₹5,499, I got a website that looks like a ₹50k build. The WhatsApp integration alone was worth it. My customers love the easy checkout experience."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-sm font-bold">A</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Arjun K.</p>
+                            <p class="text-xs text-zinc-500">Streetwear Label, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in-up testimonial-card p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-fuchsia-400">★★★★★</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-6 leading-relaxed">"Best decision I made for my brand. The site is fast, clean, and looks exactly like the big brands. The 3-month support with Premium plan is incredible value."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-sm font-bold">P</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Priya S.</p>
+                            <p class="text-xs text-zinc-500">Jewelry Brand, Jaipur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="relative py-20 lg:py-32">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="fade-in-up text-sm font-medium text-fuchsia-400 tracking-wider uppercase mb-4">FAQ</p>
+                <h2 class="fade-in-up font-space text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                    Got <span class="gradient-text">questions?</span>
+                </h2>
+            </div>
+
+            <div class="space-y-3 stagger-children">
+                <div class="fade-in-up faq-item rounded-2xl bg-zinc-900/50 border border-zinc-800/50 overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-5 sm:p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium text-white text-sm sm:text-base pr-4">How fast will my website be ready?</span>
+                        <svg class="faq-icon w-5 h-5 text-zinc-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500">
+                        <p class="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-zinc-400 leading-relaxed">Most websites are delivered within 48-72 hours for Basic and Growth plans. Premium plans may take 4-5 days depending on complexity. We're one of the fastest in the industry.</p>
+                    </div>
+                </div>
+
+                <div class="fade-in-up faq-item rounded-2xl bg-zinc-900/50 border border-zinc-800/50 overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-5 sm:p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium text-white text-sm sm:text-base pr-4">Do I need to provide anything?</span>
+                        <svg class="faq-icon w-5 h-5 text-zinc-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500">
+                        <p class="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-zinc-400 leading-relaxed">Just your logo, product images, product details (name, price, description), and any brand colors or inspiration you have in mind. We take care of everything else — design, layout, content arrangement, and optimization.</p>
+                    </div>
+                </div>
+
+                <div class="fade-in-up faq-item rounded-2xl bg-zinc-900/50 border border-zinc-800/50 overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-5 sm:p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium text-white text-sm sm:text-base pr-4">Is this a one-time payment or monthly?</span>
+                        <svg class="faq-icon w-5 h-5 text-zinc-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500">
+                        <p class="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-zinc-400 leading-relaxed">100% one-time payment. No subscriptions, no hidden fees, no monthly charges. You pay once, and the website is yours forever. The only recurring cost would be your hosting and domain (which is standard for any website).</p>
+                    </div>
+                </div>
+
+                <div class="fade-in-up faq-item rounded-2xl bg-zinc-900/50 border border-zinc-800/50 overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-5 sm:p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium text-white text-sm sm:text-base pr-4">Can customers order directly from the website?</span>
+                        <svg class="faq-icon w-5 h-5 text-zinc-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500">
+                        <p class="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-zinc-400 leading-relaxed">Yes! Basic and Growth plans come with WhatsApp-based ordering (customer clicks "Buy" → message goes to your WhatsApp with product details). Premium plan includes full payment gateway integration (Razorpay/UPI) for direct checkout.</p>
+                    </div>
+                </div>
+
+                <div class="fade-in-up faq-item rounded-2xl bg-zinc-900/50 border border-zinc-800/50 overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-5 sm:p-6 text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium text-white text-sm sm:text-base pr-4">Can I update products myself later?</span>
+                        <svg class="faq-icon w-5 h-5 text-zinc-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500">
+                        <p class="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-zinc-400 leading-relaxed">Absolutely. We build on platforms that are easy to manage. We'll give you a quick tutorial on how to add/edit products yourself. Plus, with Growth and Premium plans, you get post-launch support if you need any help.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- CTA Section -->
+    <section id="contact" class="relative py-20 lg:py-32 overflow-hidden">
+        <!-- Background effects -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in-up inline-flex items-center gap-2 px-4 py-2 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 mb-8">
+                <div class="w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse"></div>
+                <span class="text-xs sm:text-sm text-fuchsia-300 font-medium">Limited slots available this month</span>
+            </div>
+
+            <h2 class="fade-in-up font-space text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                Ready to look like the <br><span class="gradient-text">brand you are?</span>
+            </h2>
+            <p class="fade-in-up text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
+                Stop losing customers to a weak online presence. Get a premium website that converts visitors into buyers. Starting at just ₹2,999.
+            </p>
+
+            <div class="fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <a href="https://wa.me/919818082449?text=Hi%20Starterkart!%20I'm%20interested%20in%20getting%20a%20website%20for%20my%20brand.%20Can%20we%20discuss?" target="_blank" class="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-base font-semibold hover:shadow-2xl hover:shadow-green-500/25 transition-all duration-300 hover:scale-105">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat on WhatsApp
+                </a>
+                <a href="mailto:starterkartt@gmail.com" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-700 bg-zinc-900/50 text-base font-medium hover:bg-zinc-800 hover:border-zinc-600 transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    Email Us
+                </a>
+            </div>
+
+            <!-- Contact details -->
+            <div class="fade-in-up flex flex-wrap items-center justify-center gap-6 text-sm text-zinc-500">
+                <a href="https://instagram.com/starterkartt" target="_blank" class="flex items-center gap-2 hover:text-fuchsia-400 transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    @starterkartt
+                </a>
+                <span class="text-zinc-700">|</span>
+                <a href="mailto:starterkartt@gmail.com" class="flex items-center gap-2 hover:text-fuchsia-400 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    starterkartt@gmail.com
+                </a>
+                <span class="text-zinc-700">|</span>
+                <a href="tel:+919818082449" class="flex items-center gap-2 hover:text-fuchsia-400 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    9818082449
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-sm font-space">S</span>
+                    </div>
+                    <span class="font-space font-bold text-lg">Starterkart</span>
+                </div>
+
+                <p class="text-sm text-zinc-600 text-center">
+                    Premium websites for Indian fashion brands. Built with ❤️ in India.
+                </p>
+
+                <div class="flex items-center gap-4">
+                    <a href="https://instagram.com/starterkartt" target="_blank" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-fuchsia-500/50 hover:bg-fuchsia-500/10 transition-all duration-300">
+                        <svg class="w-4 h-4 text-zinc-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://wa.me/919818082449" target="_blank" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-green-500/50 hover:bg-green-500/10 transition-all duration-300">
+                        <svg class="w-4 h-4 text-zinc-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+                    <a href="mailto:starterkartt@gmail.com" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300">
+                        <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-zinc-800/50 text-center">
+                <p class="text-xs text-zinc-700">© 2025 Starterkart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919818082449?text=Hi%20Starterkart!%20I'm%20interested%20in%20getting%20a%20website%20for%20my%20brand." target="_blank" class="whatsapp-float fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 hover:shadow-xl hover:shadow-green-500/40 transition-all duration-300">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(9,9,11,0.9)';
+                navbar.style.borderBottom = '1px solid rgba(63,63,70,0.3)';
+            } else {
+                navbar.style.background = 'rgba(9,9,11,0.5)';
+                navbar.style.borderBottom = 'none';
+            }
+        });
+
+        // FAQ toggle
+        function toggleFaq(btn) {
+            const faqItem = btn.parentElement;
+            const content = faqItem.querySelector('.faq-content');
+            const icon = btn.querySelector('.faq-icon');
+            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+            // Close all FAQs
+            document.querySelectorAll('.faq-content').forEach(c => {
+                c.style.maxHeight = '0px';
+            });
+            document.querySelectorAll('.faq-icon').forEach(i => {
+                i.style.transform = 'rotate(0deg)';
+            });
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.style.borderColor = '';
+            });
+
+            // Open clicked FAQ if it was closed
+            if (!isOpen) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+                faqItem.style.borderColor = 'rgba(217, 70, 239, 0.3)';
+            }
+        }
+
+        // Counter animation
+        function animateCounters() {
+            document.querySelectorAll('.counter-value').forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                if (!target) return;
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target + '+';
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current) + '+';
+                    }
+                }, 16);
+            });
+        }
+
+        // Trigger counter animation when stats are visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const counterElements = document.querySelector('.counter-value');
+        if (counterElements) {
+            statsObserver.observe(counterElements.closest('.grid'));
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: top,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
